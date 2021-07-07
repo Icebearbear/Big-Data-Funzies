@@ -62,16 +62,30 @@ Modelling the relationship between entities in social network is crucial for dat
 
 graph can be represented as matrix
 
-[Activity 1: Modelling a small social network & Quiz 3](https://docs.google.com/spreadsheets/d/18NGLsWuAlNifVYzabaOiGNqrCHNzGV8OwmR7wtw1rHw/edit?usp=sharing)
+[Activity 1: Modelling a small social network & Quiz 3](https://docs.google.com/spreadsheets/d/18NGLsWuAlNifVYzabaOiGNqrCHNzGV8OwmR7wtw1rHw/edit?usp=sharing/)
 
-### Community detection in social network
-finding communities using a measure called betweenness abd an algorithm that relies on edge removal
+### [Community detection in social network](https://www.analyticsvidhya.com/blog/2020/04/community-detection-graphs-networks/)
+Social network contains communities of entities(users) that are connected with relationship (edges)
+we can FIND COMMUNITIES using a measure called betweenness and an algorithm that relies on edge removal
 
-## Calculating betweenness in a graph
-betweenness is used to measure the centrality of a graph based in the shortest path in it. There can be more than one shortest path
+#### Calculating betweenness in a graph
+betweenness is used to measure the centrality of a graph based in the shortest path in it. There can be more than one shortest path. it is to search for communities by partitioning all individuals 
+##### Betweenness:
 1.  Node betweenness
     find in the picture Betweeness of Nodes.png
 2.  Edge Betweenness
+    The edge betweenness centrality is defined as the number of the shortest paths that go through an edge in a graph or network
     find in picture Betwenness of edges of nodes.png
 3.  Complexity 
     find in picture Complexity.png
+
+#### Finding communities using betweenness
+##### Edge Removal:
+to get a individuals in multiple communities, after calculating edges betweenness, we use edge removal to remove edges from the highest betweenness and recalculate the edge betweenness and repeat. The result will give us the communities 
+
+##### Gravin-Newman Algorithm
+1.  find the shortest path between nodes
+2.  find the edge betweenness
+3.  the edge with highest betweenness are removed
+4.  the betweenness of all edges affected by the edge removal are recalculated '
+5.  steps 3 and 4 are repeated until no edges remain
