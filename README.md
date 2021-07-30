@@ -89,3 +89,13 @@ to get a individuals in multiple communities, after calculating edges betweennes
 3.  the edge with highest betweenness are removed
 4.  the betweenness of all edges affected by the edge removal are recalculated '
 5.  steps 3 and 4 are repeated until no edges remain
+
+### Clustering Methods
+#### MCL (picture at MCL.png)
+modelling the flow in the graph. it is also can be described as a random walk through a graph. 
+1.  Use adjacency matrix to show the connections between nodes. One of the benefits to present the graph in a adjacency matrix is that you can easily find the number of paths with different sizes between nodes.
+e.g an adjacency matrix M, it represents the path with length 1 between nodes. To find path with length 2, simply find M*M (M^2)
+2. The point is to distinguish paths within the same cluster. Create self-loop by calculating M + I (identity matrix) 
+3. Find transision matrix.  The main point is to show that the nodes are within one cluster or not with number, e.g within cluster is 1.5 and not within cluster is 0. In plain English you want to divide each element in a column by the sum of the column. Do that for all the elements. In matrix M, The value of each elements Tij represent the amount that the flow/random walker is attracted to node i to j with 1 step. Same idea if you multiple the matrix M by itself, you are increasing the number of step between nodes. 
+4. but you cant keep multiplying bcs you wont see the cluster. you have to Normalise the Transisition matrix. Define a value r. This is similar to how you normalised the transition matrix on the previous page. For each element in each column, the new value (Tij) equals that element raised to the power of (r) divided by the sum of the elements in the column, each raised to the power of (r) (you sum each element to the power of r, not calculate the sum and raise that to the power of (r)). It makes the big number bigger and small number smaller.
+5. each matrix row of non zero will be the cluster
