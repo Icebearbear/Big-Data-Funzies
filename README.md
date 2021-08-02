@@ -99,3 +99,35 @@ e.g an adjacency matrix M, it represents the path with length 1 between nodes. T
 3. Find transision matrix.  The main point is to show that the nodes are within one cluster or not with number, e.g within cluster is 1.5 and not within cluster is 0. In plain English you want to divide each element in a column by the sum of the column. Do that for all the elements. In matrix M, The value of each elements Tij represent the amount that the flow/random walker is attracted to node i to j with 1 step. Same idea if you multiple the matrix M by itself, you are increasing the number of step between nodes. 
 4. but you cant keep multiplying bcs you wont see the cluster. you have to Normalise the Transisition matrix. Define a value r. This is similar to how you normalised the transition matrix on the previous page. For each element in each column, the new value (Tij) equals that element raised to the power of (r) divided by the sum of the elements in the column, each raised to the power of (r) (you sum each element to the power of r, not calculate the sum and raise that to the power of (r)). It makes the big number bigger and small number smaller.
 5. each matrix row of non zero will be the cluster
+
+### Hierarchical clustering, 
+it covers these key concepts:
+
+Essential questions: 
+1. How should a cluster be presented? 
+2. How should I choose two clusters to merge?  
+3. When should merging stop?
+
+If you can answer the above question then you can use hierarchical clustering
+Steps of the algorithm:
+1. Choose the two nearest clusters.
+2. Merge the chosen clusters.
+3. Repeat Step 1 and Step 2 until the stopping criteria has been met.
+
+How it works:
+1.  it will find the centroid between 2 nodes, the average location between the 2 nodes is the centroid location
+2.  you can slowly create cluster by using the centroid from step 1 to another node and get another centroid between them
+3.  you can continue based on your application/objective
+
+How to control, the alternative approach:
+1. Defining the distance of two clusters as the minimum distance between pairs, where each element is from a different cluster. it is by using averange distance between all possible pairs of points
+2.  Merging two clusters on the condition that the new cluster is the one with the smallest radius. The radius of a cluster is the maximum distance between the centroid and the points of that cluster.
+3.  Using the diameter of a cluster as the factor and merge clusters which result in the smallest diameter. The diameter of a cluster is the maximum distance of all pairs of points in that cluster.
+
+When should we stop the clustering. different approach that we can take:
+1.  The algorithm stops when the density of the best merged clusters become less than some threshold.
+The density can be defined according to different factors like diameter or radius. For example, in a two-dimensional space, you may compute the density of a cluster by dividing the number of its nodes by the square of its radius to demonstrate the number of points of the cluster in its unit volume. Unit could also be defined as the radius to the power of dimension. So, if the best merge causes a new cluster with small density, the merged clusters were pretty far from each other.
+2.  The algorithm stops if the diameter of the next best merging cluster exceeds some limit.
+The factor could be radius or any variant related to it.
+3.  The algorithm stops if a combination of clusters generates a bad cluster.
+For example, it could track the average diameter of the clusters. This factor would rise moderately during the clustering. But if a big jump is observed, it means that this is a point to stop the algorithm. Note that in this rule, you may not fix a threshold, you consider the trend and stop when something unusual happens.
