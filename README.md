@@ -131,3 +131,45 @@ The density can be defined according to different factors like diameter or radiu
 The factor could be radius or any variant related to it.
 3.  The algorithm stops if a combination of clusters generates a bad cluster.
 For example, it could track the average diameter of the clusters. This factor would rise moderately during the clustering. But if a big jump is observed, it means that this is a point to stop the algorithm. Note that in this rule, you may not fix a threshold, you consider the trend and stop when something unusual happens.
+
+### K-Mean Clustering
+It is to group similar points into K clusters. More explanation [here](https://www.analyticsvidhya.com/blog/2019/08/comprehensive-guide-k-means-clustering/)
+Steps:
+1.  Define the number of K clusters
+2.  choose K random points as centroid. Each cluster has one centroid
+3.  Assign all the points to the nearest centroids
+4.  recompute the newly formed clusters
+5.  repeat 3 and 4 
+When to stop:
+1.  Centroids of newly formed clusters do not change
+2.  Points remain in the same cluster
+3.  Maximum number of iterations are reached
+
+### Structure of the Web (shown in picture structure_of_web.png)
+It includes :
+1.  In, nodes that can reach the giant SCC but cannot be reached from it e.g. new web pages, and
+2.  SCC (Strong Connected Components). a strongly connected component is a region from which you can get from any point to any other point along a directed path. So in the context of the web graph, with this giant SCC, what this means is that from any webpage inside this blob, you can get to any other webpage inside this blob, just by traversing a sequence of hyperlinks.
+3.  Out, nodes that can be reached from the giant SCC but cannot reach it e.g. corporate websites.
+4.  Tendrils: the nodes reachable from IN that can’t reach the giant SCC, and the nodes that can reach OUT but can’t be reached from the giant SCC. If a tendril node satisfies both conditions then it’s part of a tube that travels from IN to OUT without touching the giant SCC, and
+
+### Web Crawler
+Web Crawler is one of the most used page ranking in the past in recent years, but large scale search engine like Goole use not only Web Crawler. there are rules to follow to Web Crawler
+
+### Page Rank
+The higher the page rank of a page, the higher the importance of the page is. Think of the web as a directed graph, each pages are nodes and the arcs between nodes are the link between them. each step a random surfer moves from current page to a randomly chosen page that it links to.
+
+#### Markov Process
+Markov process is stochastic, The property of being well described by a random probability distribution. This means it is a random process in which the future is independent on the past, given the present.
+This transition probabibily (moving from current page to another after a single step) can be presented in a matrix. This transition matrix describes what happen to the surfer after a single step. 
+For a graph with N pages, the matrix has dimension of NxN. If there is a link between two nodes, value of that m(ij) is 1/k where k is the total number of outgoing links from j to i. if theres no link, m(ij) is 0. 
+
+Probability distribution for a location of a surfer can be described by column vector of length n. for each j columns of NxN matrix, the probability a surfer is at page j is the j's component. This probability is the idealised PageRank function
+
+The limiting distribution vector v, an eigenvector.
+[I dont understand](http://pi.math.cornell.edu/~mec/Winter2009/RalucaRemus/Lecture3/lecture3.html)
+
+What to avoid when using PageRank:
+1.  Dead end, the one that is not scc. To solve it, remove all the dead ends recursively
+2.  Spider web  
+
+[simpler explanation,read to understand more about PageRank](https://www.isical.ac.in/~debapriyo/teaching/datamining2014/slides/PageRank.pdf)
