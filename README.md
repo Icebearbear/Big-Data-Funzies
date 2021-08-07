@@ -173,3 +173,16 @@ What to avoid when using PageRank:
 2.  Spider web  
 
 [simpler explanation,read to understand more about PageRank](https://www.isical.ac.in/~debapriyo/teaching/datamining2014/slides/PageRank.pdf)
+\
+
+[Difference between Yahoo and Google search engine](https://www.searchenginejournal.com/google-and-yahoo-search-engine-technology-comparison/2267/#close)
+
+### Problem comes when the Matrix consist of billions of nodes
+It is important to multiply matrix a certain times or to multiply with a vector, however the matrix is huge. To address this issue, a software stack is develop to apply parallelism on larger scale application. It uses computing clusters-a group of connected nodes by ethernet or inexpensive switches. 
+Each computing node consist of a processor and memory. This sofware stack is based on a file system called distributed file system. To be fault tolerant during computation, it creates multiple copies of the data. It also uses larger units than disc blocks in ordinary operation systems.
+
+#### Map Reduce 
+Map reduce is one of the high level programming systems based on this file system. It helps to perform calculation with efficient time and deal with hardware failure well
+[Here is how MapReduce works](https://courses.edx.org/assets/courseware/v1/12127e16fb054ef296141f8809f00193/asset-v1:AdelaideX+BigDataX+1T2021+type@asset+block/5_2_1-more-about-MapReduce.pdf)
+
+Combiner is a kind of reducer. Combiner is mainly used to reduce the size of data which is transferred between nodes. Combiner is not always run, your computer decides it. So, it is better to have combiner func and reducer and func the same or the same input and output type
