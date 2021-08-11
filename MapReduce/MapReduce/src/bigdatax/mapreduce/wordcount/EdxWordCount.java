@@ -15,14 +15,17 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.fs.Path;
 
 public class EdxWordCount
-{
+{	
 	public static class EdxMap extends Mapper<LongWritable,Text,Text,IntWritable> {
+		private Text word = new Text();
 		public void map(LongWritable key, Text value,Context context) throws IOException,InterruptedException{
+			
 			String line = value.toString().toLowerCase();
-			StringTokenizer tokenizer = new StringTokenizer(line);
-			while (tokenizer.hasMoreTokens()) {
-				value.set(tokenizer.nextToken());
-				context.write(value, new IntWritable(1));
+			StringTokenizer tokenizer = new StringTokenizer(line); // splits the lines into tokens separated by whitespaces via StringTokenizer
+			while (tokenizer.hasMoreTokens()) {	// if there are more words in tokenizer, 
+				String str = Integer.toString(tokenizer.nextToken().length());
+				word.set(str);	// keep creating next token until there are no more token in tokenizer
+				context.write(word, new IntWritable(1));	// it creates this format <word, 1>
 			}
 		}
 	}
@@ -62,8 +65,6 @@ public class EdxWordCount
 		
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(IntWritable.class);
-//		job.setMapOutputKeyClass(theClass);
-//		job.setMapOutputValueClass(theClass);
 		
 		job.setInputFormatClass(TextInputFormat.class);
 		job.setOutputFormatClass(TextOutputFormat.class);

@@ -6,7 +6,7 @@
 4.  Select Run as > Run Configuration
 5.  Open environment tab, add below paths & check 'Append env to native env',&apply 
     HADOOP_HOME with value C:\Users\YourUsername\eclipse-workspace\MapReduce\hadoop-libs\win32
-    PATh with value C:\Users\YourUsername\eclipse-workspace\MapReduce\hadoop-libs\win32\lib
+    PATh with value C:\Users\YourUsername\eclipse-workspace\MapReduce\hadoop-libs\win32\bin
 6.  Open Argument tab, add INPUT.txt output (input text file and an output folder for output)
 7.  Open the wordcount java file in src/bigdatax.mapreduce.wordcount
 8.  Run the wordcount java file, press Run as > Java Application
