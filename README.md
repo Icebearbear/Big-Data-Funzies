@@ -158,10 +158,32 @@ Web Crawler is one of the most used page ranking in the past in recent years, bu
 ### Page Rank
 The higher the page rank of a page, the higher the importance of the page is. Think of the web as a directed graph, each pages are nodes and the arcs between nodes are the link between them. each step a random surfer moves from current page to a randomly chosen page that it links to.
 
+Refer to /PageRank_formula.png and below is the explanation.
+where |G| is the total number of nodes (pages) in the graph, α is the random jump
+factor, L(n) is the set of pages that link to n, and C(m) is the out-degree of node m
+(the number of links on page m). The random jump factor α is sometimes called the
+“teleportation” factor; alternatively, (1 − α) is referred to as the “damping” factor.
+Let us break down each component of the formula in detail. First, note that
+PageRank is defined recursively—this gives rise to an iterative algorithm we will detail
+in a bit. A web page n receives PageRank “contributions” from all pages that link to
+it, L(n). Let us consider a page m from the set of pages L(n): a random surfer at
+m will arrive at n with probability 1/C(m) since a link is selected at random from all
+outgoing links. Since the PageRank value of m is the probability that the random surfer
+will be at m, the probability of arriving at n from m is P(m)/C(m). To compute the
+
+PageRank of n, we need to sum contributions from all pages that link to n. This is
+the summation in the second half of the equation. However, we also need to take into
+account the random jump: there is a 1/|G| chance of landing at any particular page,
+where |G| is the number of nodes in the graph. Of course, the two contributions need to
+be combined: with probability α the random surfer executes a random jump, and with
+probability 1 − α the random surfer follows a hyperlink.
+
 #### Markov Process
 Markov process is stochastic, The property of being well described by a random probability distribution. This means it is a random process in which the future is independent on the past, given the present.
-This transition probabibily (moving from current page to another after a single step) can be presented in a matrix. This transition matrix describes what happen to the surfer after a single step. 
-For a graph with N pages, the matrix has dimension of NxN. If there is a link between two nodes, value of that m(ij) is 1/k where k is the total number of outgoing links from j to i. if theres no link, m(ij) is 0. 
+This transition probabibily (moving from current page to another after a single step) can be presented in a matrix. 
+This Transition matrix describes what happen to the surfer after a single step. For a graph with N pages, the matrix has dimension of NxN. If there is a link between two nodes, value of that m(ij) is 1/k where k is the total number of outgoing links from j to i. if theres no link, m(ij) is 0. These value will fill in Transition matrix
+
+the limiting distribution,v , is [1/n, .... 1/n]^T for the length of n. n = the matrix row and col. Already explained at Clustering section
 
 Probability distribution for a location of a surfer can be described by column vector of length n. for each j columns of NxN matrix, the probability a surfer is at page j is the j's component. This probability is the idealised PageRank function
 
@@ -181,8 +203,13 @@ What to avoid when using PageRank:
 It is important to multiply matrix a certain times or to multiply with a vector, however the matrix is huge. To address this issue, a software stack is develop to apply parallelism on larger scale application. It uses computing clusters-a group of connected nodes by ethernet or inexpensive switches. 
 Each computing node consist of a processor and memory. This sofware stack is based on a file system called distributed file system. To be fault tolerant during computation, it creates multiple copies of the data. It also uses larger units than disc blocks in ordinary operation systems.
 
-#### Map Reduce 
+#### Map Reduce
 Map reduce is one of the high level programming systems based on this file system. It helps to perform calculation with efficient time and deal with hardware failure well
 [Here is how MapReduce works](https://courses.edx.org/assets/courseware/v1/12127e16fb054ef296141f8809f00193/asset-v1:AdelaideX+BigDataX+1T2021+type@asset+block/5_2_1-more-about-MapReduce.pdf)
+[Here is the Book for MapReduce](https://lintool.github.io/MapReduceAlgorithms/MapReduce-book-final.pdf)
 
 Combiner is a kind of reducer. Combiner is mainly used to reduce the size of data which is transferred between nodes. Combiner is not always run, your computer decides it. So, it is better to have combiner func and reducer and func the same or the same input and output type
+
+##### Map Reduce for PageRank
+Because pageRank uses matrix multiplication alot, we can use mapreduce to perform that. Explanation[ matrix multiplication with map reduce](https://www.geeksforgeeks.org/matrix-multiplication-with-1-mapreduce-step/) and picture /Matrix Matrix Multiplication with Mapreduce.png
+when creating transition matrix in the process, there are alof of zeros values in the matrix, this is called Sparse matrix. So to avoid storing zeroes values, we store node, degree (how many branches out from the node), neighbour (where the branches going to).

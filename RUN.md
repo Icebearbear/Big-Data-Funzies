@@ -14,3 +14,14 @@
 10. To write another mapreduce program, Start by making a copy of the wordcount package from above, by right-clicking on the package bigdatax.mapreduce.wordcount, selecting Copy, then right-clicking on the src folder and choosing Paste.
 11. Choose a new name for the package, then click OK.
 12. Don't forget to add a new Run Configuration for each package you create with the specific parameters required.
+
+for wordcount2 arguments -> FirstInputFile.txt SecondInputFile.txt output2 outputfinal
+
+# NEXT TASK TODOOOO
+Page Rank with map reduce
+
+1. in mapreduce.pagerank package
+2. data is already sorted out in node1 - related nodes to the node1
+3. next step is to create another mapreduce job to do page rank
+4. problem is i dont know how to do it and i am confused
+5. lets move on to another concepts first and come back here again
