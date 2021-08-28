@@ -213,3 +213,26 @@ Combiner is a kind of reducer. Combiner is mainly used to reduce the size of dat
 ##### Map Reduce for PageRank
 Because pageRank uses matrix multiplication alot, we can use mapreduce to perform that. Explanation[ matrix multiplication with map reduce](https://www.geeksforgeeks.org/matrix-multiplication-with-1-mapreduce-step/) and picture /Matrix Matrix Multiplication with Mapreduce.png
 when creating transition matrix in the process, there are alof of zeros values in the matrix, this is called Sparse matrix. So to avoid storing zeroes values, we store node, degree (how many branches out from the node), neighbour (where the branches going to).
+
+
+### Word Importance in a collection of documents
+
+[TF.IDF](https://towardsdatascience.com/how-important-are-the-words-in-your-text-data-tf-idf-answers-6fdc733bb066) is an important measure to jusge the importance of words in a document. which should belong to a collection of documents. It takes into account the occurrences of the word in the document itself and it combines it with occurences of this word in any other documents
+
+Some terms of big data algorithm :
+1.  Word Importance
+2.  Hash functions
+3.  Indexes
+4.  Secondary storage
+
+To find the similarities between documents, use Jaccard similarity. it compares character to character and word by word. another way to find similarities between documents is Cosine similarity. it calculates the dot product of the two documents. Result of 1 being exactly the same and 0 being the total opposite
+
+[Jaccard Similarity ith K Shingels](https://www.cs.utah.edu/~jeffp/teaching/cs5955/L4-Jaccard+Shingle.pdf)
+
+To make the words in document into sets, K Shingels is used. K Shingels can be formed by words or characted
+
+Now, in big data we are dealing with alot of data with alot of sets in the form ot character or words. When computing the union of different sents, you need to load all these sets and compute the intersection and union sized for each paris. Instead of dealing with such a large sets, which requires a lot of computing time and memory, MinHash can provide a sketch to approximate this measure in a scalable way. 
+[MinHash](https://aksakalli.github.io/2016/03/01/jaccard-similarity-with-minhash.html) is a mechanism that can be used to estimate the similarity of two sets witha lesser memory space and in a more efficient way. It is done by using hashing/mapping function that typically reorders the elemts using simple math operation. MinHash has a surprising property, according to which, the probability that the MinHash of random permutation produces the same value for the two sets equals the Jaccard Similarity Coefficient of those sets.
+
+After getting the Signature Matrix from MinHash, we can use Local-Sensitive Hashing (LSH). More example [here](https://medium.com/carbon-consulting/explaining-lsh-minhash-simhash-c3cc33040030) and [here](https://towardsdatascience.com/understanding-locality-sensitive-hashing-49f6d1f6134)
+and this is a [video](https://www.youtube.com/watch?v=96WOGPUgMfw) of more detailed explanation of MinHash
