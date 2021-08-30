@@ -236,3 +236,26 @@ Now, in big data we are dealing with alot of data with alot of sets in the form 
 
 After getting the Signature Matrix from MinHash, we can use Local-Sensitive Hashing (LSH). More example [here](https://medium.com/carbon-consulting/explaining-lsh-minhash-simhash-c3cc33040030) and [here](https://towardsdatascience.com/understanding-locality-sensitive-hashing-49f6d1f6134)
 and this is a [video](https://www.youtube.com/watch?v=96WOGPUgMfw) of more detailed explanation of MinHash
+
+#### Association rules
+More explanation [here](https://towardsdatascience.com/association-rule-mining-be4122fc1793)
+It is defined to be corelation between X -> Y. X being sets of items that is related to item Y
+Concepts of association rules:
+1.  Confidence
+2.  Support
+3.  Lift
+
+[A-priori Algorithm](https://www.geeksforgeeks.org/apriori-algorithm/) is an algorithm to compute frequent items. It is very efficient. It is done by these observations:
+1.  itemset is frequent
+2.  support of an itemset never exceeds the support of its subset.
+3.  threshold will be 1% of the basket.
+a-priori algorithm from scratch https://www.youtube.com/watch?v=2oVMmMdeCOQ
+
+#### Movie and music recommendations
+
+##### Collaborative filtering recommending systems
+the approach is to look at users that are similar to the targetted user. The idea is that users who are similar will like the movies that they havent seen but that similar user has liked. A recommendation for a user U is made based on users that are most similar to U and recommending items that these users liked.  You can use Jaccard similarity ti fins the similar users.
+
+Rating matrix is usually sparse because the watched movies are much lesser than total movies. This makes it hard to do a recommendation as theres not much information that we can based our decision on when considering rating matrix. Here we can use clustering to improve the procedure of finding recommendation to make the matrix less sparse.
+1.  We can group single movies into a super movie e.g a series of single movies (thor, captain marvel, etc) into one (marvel). The rating will be the average of all marvel movies.
+2.  We can group user by using your chosen clustering algorithm. Similarly, you can cluster users to super users and take the average among these users as the entry rating.
