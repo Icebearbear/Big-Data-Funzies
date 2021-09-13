@@ -259,3 +259,23 @@ the approach is to look at users that are similar to the targetted user. The ide
 Rating matrix is usually sparse because the watched movies are much lesser than total movies. This makes it hard to do a recommendation as theres not much information that we can based our decision on when considering rating matrix. Here we can use clustering to improve the procedure of finding recommendation to make the matrix less sparse.
 1.  We can group single movies into a super movie e.g a series of single movies (thor, captain marvel, etc) into one (marvel). The rating will be the average of all marvel movies.
 2.  We can group user by using your chosen clustering algorithm. Similarly, you can cluster users to super users and take the average among these users as the entry rating.
+
+in Netflix for example, we use Actor as boolean, year as numerical value to serve as profile. if the data are numerical, we can use jaccard similarity to find. if it is numerical, we can use cossine similarity. If the movie is part of a series, then we can recommend another movie in the series as a straightforward escort. summarised features of movies : 1) actors, 2) director, 3) year of movie, 4) year of movie
+
+in Spotify as music streaming app, 1) the music genre is an important feature for music recommendation. 2) Music description also can be used such as the Million Song Dataset. It provides a characterisation of the piece of music. 3) timbre and rythm.
+
+To measure how effective is you recommendation system, Mean Absolute Error (MEA) and Root-Mean-Squear Error (RMSE) can be used. It is important to examine the Precision and the Recall of the system.
+
+#### Google Ads System
+##### Matching algorithm to solve Google Ads problem
+There are online and offline algorithm. Online algo is usually greedy, it will take the highest bidder with budget left. Sometimes not all online algo gives the best value earned by Google. Hence, Competitive Ratio is used. The idea of Competitive Ratio is that we wish to have for a ratio of the guaranteed performance of the online algorithm. We would like to compare this with the performance of the optimal algorithm. Other than online algorithm, there is also balance algorithm. it choose bidder with the most budget left
+
+To read: Online Graph Matching Problem, Balance algorithm analysis
+To do next: Do activity 11: greeedy and balance algo
+
+#### Mining rapidly arriving data streams
+##### Sampling
+Data streams usually comes rapidly and produce alot of stream elements which is impossible to store all the elements. You have restrict yourself to storing a subset of all the stream elements. Data sampling allows you to sample a data in a way that it still be able to answer question regarding data. There are some different approaches for sampling a data stream:
+1.  Bernoulli sampling .Here each stream element is included independently of the others with probability p and excluded with probability q = 1 - p. p is the parameter that allows you to control the fraction of stream elements stored. If you would like to store one 1/kth of the total number of stream elements, then you store each arriving stream element, e_i, with probability p equals to 1 over k. In this way, the expected number of stream elements stored is a 1/k fraction of the overall arriving stream elements. One issue with this method is that the set of sample is growing with the number of stream elements which makes the sample size too large. Then you have reduce the fraction 
+2.  Reservoir sampling. It works with fixed size of sampled elements. Assume you would like to have a sample set with size k. When your a sample i, it is < or = k elements, then add them all. When sampling element ej, j > k, then you include it in your sample set with probability q_j equals to k on j. If you want to include element ej, then one of the elements and as chosen uniformly at random is removed from S and ej is added to S. 
+3.  If you're only interested in the most recent elements, you can work with a time window. Let w will be the parameter determining the time window size. Then you would always store the w most recent elements in your data stream.
