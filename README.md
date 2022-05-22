@@ -1,4 +1,5 @@
 # Big-Data-Funzies
+It is just journal of my attempt to learn Big Data *wink*
 
 ## Section 1
 ### Four V 
